@@ -1,0 +1,12 @@
+# Executable
+my_program
+my_program.exe
+
+# Object files
+*.o
+
+# Environment file (Do NOT upload secrets!)
+.env
+
+# VSCode files (if you use it)
+.vscode/
