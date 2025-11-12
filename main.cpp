@@ -32,7 +32,7 @@ int main(int argc,char* argv[]){
           }
         }
       }
-      processManagement.executeTasks();
+      // processManagement.executeTasks();
 
     } else {
       std::cout << "Directory does not exist or action is invalid" << std::endl;
