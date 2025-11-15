@@ -64,8 +64,14 @@ bool DatabaseLogger::init()
     int rc = sqlite3_exec(m_db, sql, 0, 0, &errMsg); // Use m_db
     if (rc != SQLITE_OK)
     {
-      std::cerr << "SQL log error: " << errMsg << std::endl;
-      sqlite3_free(errMsg);
+     if (errMsg) {
+            // Print the error and message all on one line
+            std::cerr << "SQL log error: " << errMsg << std::endl; 
+            sqlite3_free(errMsg);
+        } else {
+            // Also print all on one line
+            std::cerr << "SQL log error: Unknown error (rc=" << rc << ")" << std::endl;
+        }
     }
 
     sqlite3_free(sql);

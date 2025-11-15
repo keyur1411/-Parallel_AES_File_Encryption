@@ -7,8 +7,8 @@
 
 // We pass num_threads to the ThreadPool constructor
 FileProcessor::FileProcessor(const std::string& db_path, size_t num_threads)
-    : m_pool(num_threads), 
-      m_logger(std::make_shared<DatabaseLogger>(db_path)) {}
+  : m_logger(std::make_shared<DatabaseLogger>(db_path)),
+      m_pool(num_threads) {}
 
 bool FileProcessor::init() {
     return m_logger->init();

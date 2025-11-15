@@ -19,7 +19,7 @@ private:
     // This is the actual task that gets submitted to the pool
     void processFileTask(std::string file_path, std::string temp_path, std::string mode, const unsigned char* key);
 
+    std::shared_ptr<DatabaseLogger> m_logger;
     ThreadPool m_pool;
     // Logger must be shared, so we use a shared_ptr
-    std::shared_ptr<DatabaseLogger> m_logger;
 };
