@@ -2,7 +2,7 @@
 #include <iostream> // For std::cerr
 
 DatabaseLogger::DatabaseLogger(const std::string &db_path)
-    : m_db_path(db_path), m_db(nullptr) {}
+    : m_db_path(db_path), m_db(nullptr) {}//Initlizing DatabaseLogger with db path
 
 DatabaseLogger::~DatabaseLogger()
 {
@@ -45,15 +45,7 @@ bool DatabaseLogger::init()
   void DatabaseLogger::log(const std::string &filename, const std::string &operation,
                            const std::string &status, double time_ms)
   {
-    // Copy your original 'log_to_db' function code here
-    // **Change:**
-    // - Remove 'sqlite3 *db;' and 'int rc = sqlite3_open(...)'
-    //   The database (m_db) is already open!
-
-    // --- Start of Pinned Code (log_to_db) ---
     char *errMsg = 0;
-
-    // DB is already open, so we just use m_db
     if (!m_db)
     {
       std::cerr << "Database not initialized, cannot log." << std::endl;
@@ -76,7 +68,4 @@ bool DatabaseLogger::init()
     }
 
     sqlite3_free(sql);
-
-    // Do NOT close the db here
-    // --- End of Pinned Code ---
   }

@@ -82,7 +82,7 @@ bool CryptoPipeline::decryptFile(const std::string& in_path, const std::string& 
         return false; 
     }
     inFile.read(reinterpret_cast<char*>(iv), m_iv_size);
-    if (inFile.gcount() != m_iv_size) { 
+    if (static_cast<size_t>(inFile.gcount()) != m_iv_size) { 
         std::cerr << "File is too small or corrupt (missing IV)." << std::endl;
         return false; 
     }

@@ -3,22 +3,15 @@
 #include <chrono>
 #include <cstdio> // For std::remove, std::rename
 
-// Include your new project headers!
+// Project Headers
 #include "crypto/CryptoPipeline.hpp"
 #include "logging/DatabaseLogger.hpp"
 
-// Your original file had these includes, main.cpp still needs them
-#include <fstream> 
+#include <fstream> //for file system
 
 int main() {
-    // Copy your original 'main' function code
-    // **Change:**
-    // - Replace 'init_database()' with object-oriented calls
-    // - Replace 'encryptFile_threaded()' with 'pipeline.encryptFile()'
 
-    // --- Start of Pinned Code (main) ---
-
-    // --- 1. Init Objects ---
+    //Checking for Database
     DatabaseLogger logger("file_log.db"); // Create object
     if (!logger.init()) { // Call method
         std::cerr << "Failed to initialize logging database. Exiting." << std::endl;
@@ -28,7 +21,7 @@ int main() {
 
     CryptoPipeline pipeline; // Create our pipeline object
 
-    // --- 2. User Input ---
+    //User Input
     std::string testFilename;
     std::cout << "Enter the path to your file (e.g., 'image.jpg'): ";
     std::getline(std::cin, testFilename);
@@ -48,7 +41,7 @@ int main() {
     char mode;
     std::cin >> mode;
 
-    // --- 3. Timer & Operation ---
+    //Timer & Operation
     auto start_time = std::chrono::high_resolution_clock::now();
     bool success = false;
     std::string operation;
@@ -57,13 +50,11 @@ int main() {
     if (mode == 'e') {
         operation = "ENCRYPT";
         std::cout << "Encrypting '" << testFilename << "'..." << std::endl;
-        // Use the pipeline object!
         success = pipeline.encryptFile(testFilename, tempFilename, key);
 
     } else if (mode == 'd') {
         operation = "DECRYPT";
         std::cout << "Decrypting '" << testFilename << "'..." << std::endl;
-        // Use the pipeline object!
         success = pipeline.decryptFile(testFilename, tempFilename, key);
 
     } else {
@@ -75,7 +66,7 @@ int main() {
     auto end_time = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> duration_ms = end_time - start_time;
 
-    // --- 4. Finalize & Log ---
+    // Finalize & Log
     if (success) {
         std::remove(testFilename.c_str()); 
         std::rename(tempFilename.c_str(), testFilename.c_str());
@@ -91,5 +82,4 @@ int main() {
     std::cout << "Operation logged to 'file_log.db' (" << status << ", " << duration_ms.count() << " ms)." << std::endl;
 
     return success ? 0 : 1;
-    // --- End of Pinned Code ---
 }
