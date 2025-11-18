@@ -8,6 +8,7 @@ test_gen_script.exe
 #Database
 *.db
 # Executable
+file_crypter
 my_program
 my_program.exe
 
